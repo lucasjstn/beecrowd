@@ -4,21 +4,28 @@ var input = require("fs").readFileSync("stdin", "utf8");
 var lines = input.split("\n");
 
 const weights = [2, 3, 4, 1];
-const grades = lines[0].split(" ");
+const grades = lines[0].split(" ").map((element) => {
+  return parseFloat(element);
+});
+
 const finalGrade = parseFloat(lines[1]);
 
 const calculatedAverage = weightedAverage(grades, weights);
 
-console.log("Media: ", calculatedAverage);
+console.log("Media:", calculatedAverage);
 if (calculatedAverage >= 7) {
   console.log("Aluno aprovado.");
   return;
 } else if (calculatedAverage >= 5 && calculatedAverage <= 6.9) {
   console.log("Aluno em exame.");
-  console.log("Nota do exame: ", finalGrade);
+  console.log("Nota do exame:", finalGrade.toFixed(1));
   if (finalAverage(calculatedAverage, finalGrade) >= 5) {
     console.log("Aluno aprovado.");
-    console.log("Media final: ", finalAverage(calculatedAverage, finalGrade));
+    console.log("Media final:", finalAverage(calculatedAverage, finalGrade));
+  } else {
+    console.log("Aluno reprovado");
+    // console.log(calculatedAverage);
+    console.log("Media final:", finalAverage(calculatedAverage, finalGrade));
   }
 } else {
   console.log("Aluno reprovado.");
@@ -43,5 +50,5 @@ function weightedAverage(grades, weights) {
 }
 
 function finalAverage(average, finalGrade) {
-  return (average + finalGrade) / 2;
+  return ((parseFloat(average) + parseFloat(finalGrade)) / 2).toFixed(1);
 }
