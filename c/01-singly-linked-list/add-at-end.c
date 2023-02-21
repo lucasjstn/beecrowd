@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
 struct node {
 	int data;
 	struct node* link;
@@ -38,6 +37,21 @@ void count_data(struct node *head){
 	printf("There is %d elements", count);
 }
 
+void add_at_end(struct node *head, int data) {
+	struct node *ptr, *temp;
+	ptr = head;
+
+	temp = (struct node*)malloc(sizeof(struct node));
+
+	temp->data = data;
+	temp->link = NULL;
+
+	while(ptr->link != NULL) {
+		ptr =	ptr->link;
+	}
+
+	ptr->link = temp;
+}
 
 int main() {
 
@@ -52,9 +66,10 @@ int main() {
 	current->link = NULL;
 	head->link = current;
 
+	add_at_end(head, 34);
 	print_data(head);
 
 	count_data(head);
-	
+
 	return 0;
 }
