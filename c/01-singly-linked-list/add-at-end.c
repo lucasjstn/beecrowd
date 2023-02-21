@@ -37,7 +37,7 @@ void count_data(struct node *head){
 	printf("There is %d elements", count);
 }
 
-void add_at_end(struct node *head, int data) {
+struct node* add_at_end(struct node *head, int data) {
 	struct node *ptr, *temp;
 	ptr = head;
 
@@ -51,6 +51,7 @@ void add_at_end(struct node *head, int data) {
 	}
 
 	ptr->link = temp;
+	return temp;
 }
 
 int main() {
@@ -60,16 +61,14 @@ int main() {
 	head->data = 45;
 	head->link = NULL;
 
-	struct node *current = malloc(sizeof(struct node));
+	struct node *ptr = head;
 
-	current->data = 98;
-	current->link = NULL;
-	head->link = current;
+	ptr = add_at_end(ptr, 98);
+	ptr = add_at_end(ptr, 100);
+	ptr = add_at_end(ptr, 101);
+	ptr = add_at_end(ptr, 102);
 
-	add_at_end(head, 34);
 	print_data(head);
-
-	count_data(head);
 
 	return 0;
 }
